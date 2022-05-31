@@ -1,4 +1,4 @@
 numpy==1.19.2
 fastapi==0.61.1
-starletter==0.20.1
+starlette==0.20.1
 pysqlite==2.6.0
