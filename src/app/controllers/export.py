@@ -1,7 +1,8 @@
-from starlette.responses import FileResponse
-import os 
+from src.app.models.utils import set, get
+from src.app.models.config.config import db
 
-async def getModel(filePath): 
-    filePath.replace("/", "\\")
-    parent_dir_path = os.path.dirname(os.path.realpath('src'))
-    return FileResponse(parent_dir_path + r"\src\models\kaggle" + "\\" + filePath)
+async def InsertData(collection, document, data): 
+    return await set.Set(collection, document, data, db)
+
+async def GetData(collection, document): 
+    return await get.Get(collection, document, db)
