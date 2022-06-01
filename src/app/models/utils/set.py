@@ -1,6 +1,6 @@
 async def Set(collection, document, data, db):
     try:
-        db.collection(collection).document(document).set(data.dict())
+        db.collection(collection).document(document).set(data)
         return {"message": "Insert datas on " + collection + " -> " + document + " works!"}
     except Exception as e:
         print(e)
