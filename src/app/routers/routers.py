@@ -8,4 +8,4 @@ async def root():
 
 @router.get("/{filePath:path}", status_code=200)
 async def model(filePath: str):
-    return getModel(filePath)
+    return await getModel(filePath)
