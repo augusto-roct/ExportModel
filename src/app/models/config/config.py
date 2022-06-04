@@ -17,7 +17,8 @@ except:
     credentials["token_uri"]= os.environ["TOKEN_URI"]
     credentials["auth_provider_x509_cert_url"]= os.environ["AUTH_PROVIDER_X509_CERT_URL"]
     credentials["client_x509_cert_url"]= os.environ["CLIENT_X509_CERT_URL"]
-    
+
+print(credentials)
 default_app = firebase_admin.initialize_app(credentials)
 
 db = firestore.client()
