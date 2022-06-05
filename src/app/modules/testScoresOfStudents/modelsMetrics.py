@@ -17,8 +17,11 @@ async def GetModelsMetrics(db):
         data.append({'name': keys[index]})
         
         for keyMetric in auxData[index]:
-            valueMetric = auxData[index][keyMetric]
-            
+            if keyMetric == 'score':
+                valueMetric = "{:.2f}%".format(auxData[index][keyMetric] * 100)
+            else:
+                valueMetric = "{:.2f}".format(auxData[index][keyMetric])
+                
             data[index][keyMetric] = valueMetric
         
     return data
