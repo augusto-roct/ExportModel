@@ -1,27 +1,9 @@
+from src.app.utils.documentToArray import TransformToArray
 from src.app.models.utils.get import Get
-import collections
 
-async def GetModelsMetrics(db):
-    data = await Get('test-scores-of-students', 'models', db)
+async def GetModelsMetrics(db, collection, document, reverse):
+    data = await Get(collection, document, db)
     
-    keys = list(data.keys())
-    
-    for key in keys:
-        data[key] = collections.OrderedDict(sorted(data[key].items(),reverse=True))
-    
-    auxData = list(data.values())
-
-    data = []
-    
-    for index in range(len(auxData)):
-        data.append({'name': keys[index]})
+    response = TransformToArray(data, reverse)
         
-        for keyMetric in auxData[index]:
-            if keyMetric == 'score':
-                valueMetric = "{:.2f}%".format(auxData[index][keyMetric] * 100)
-            else:
-                valueMetric = "{:.2f}".format(auxData[index][keyMetric])
-                
-            data[index][keyMetric] = valueMetric
-        
-    return data
+    return response

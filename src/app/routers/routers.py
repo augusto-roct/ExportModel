@@ -1,20 +1,18 @@
 from fastapi import APIRouter
-from src.app.controllers.export import GetData, InsertData, GetMetrics
+from src.app.controllers.export import GetAnalisys
+from src.app.controllers.set import InsertData
 
 router = APIRouter()
 
-@router.get("/metrics/{collection}", status_code=200)
-async def Metrics(collection: str):
-    print(collection)
-    return await GetMetrics(collection)
+@router.get("/{collection}/{document}", status_code=200)
+async def Analisys(collection: str, document: str, reverse: bool):
+    print("Get " + document + " to: ", collection)
+    return await GetAnalisys(collection, document, reverse)
 
 @router.post("/{collection}/{document}", status_code=200)
 async def Insert(collection: str, document: str, data: dict, user: str, password: str):
+    print("Insert to: ", collection)
     return await InsertData(collection, document, data, user, password)
-
-@router.get("/{collection}/{document}", status_code=200)
-async def Insert(collection: str, document: str):
-    return await GetData(collection, document)
 
 @router.get("/", status_code=200)
 async def root():
